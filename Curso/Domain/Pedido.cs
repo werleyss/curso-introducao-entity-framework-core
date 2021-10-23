@@ -13,6 +13,6 @@ namespace CursoEFCore.Domain
         public TipoFrete TipoFrete {get; set;}
         public StatusPedido Status {get; set;}
         public string Observacao {get; set;}
-        public ICollection<PedidoItem> Item {get; set;}
+        public ICollection<PedidoItem> Itens {get; set;}
     }
 }
