@@ -18,6 +18,7 @@ namespace CursoEFCore.Domain
         public string Estado {get; set;}
         [Required]
         public string Cidade {get; set;}
+        public string Email { get; set; }
 
     }
 }   
