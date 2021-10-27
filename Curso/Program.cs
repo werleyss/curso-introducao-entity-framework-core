@@ -20,7 +20,17 @@ namespace CursoEFCore
             }*/
 
             //InserirDados();
-            InserirDadosEmMassa();
+            //InserirDadosEmMassa();
+            ConsultarDados();
+        }
+
+        private static void ConsultarDados()
+        {
+            using var db = new Data.ApplicationContext();
+
+            var consultaPorSintaxe = (from c in db.Clientes where c.Id > 0 select c).ToList();
+
+            var consultaPorMetodo = db.Clientes.Where(p => p.Id > 0).ToList();
         }
 
         private static void InserirDadosEmMassa()
