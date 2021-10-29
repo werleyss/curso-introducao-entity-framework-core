@@ -21,7 +21,65 @@ namespace CursoEFCore
 
             //InserirDados();
             //InserirDadosEmMassa();
-            ConsultarDados();
+            //ConsultarDados();
+            // ConsultarPedidoCarregmentoAdiantamento();
+            //AtualizarDados();
+            RemoverDados();
+        }
+
+        private static void RemoverDados()
+        {
+            using var db = new Data.ApplicationContext();
+
+            var cliente = db.Clientes.Find(2);
+
+            //db.Clientes.Remove(cliente);
+            //db.Remove(cliente);
+            db.Entry(cliente).State = EntityState.Detached;
+
+            db.SaveChanges();
+
+        }
+
+        private static void AtualizarDados()
+        {
+            using var db = new Data.ApplicationContext();
+
+            //var cliente = db.Clientes.Find(1);
+
+            var cliente = new
+            {
+                Id = 1
+            };
+
+            var clienteDesconectado = new
+            {
+                Nome = "Cliente desconectado",
+                Telefone = "7966666"
+            };
+
+            db.Attach(cliente);
+            //db.Entry(cliente).State = EntityState.Modified;
+            db.Entry(cliente).CurrentValues.SetValues(clienteDesconectado);
+
+            db.SaveChanges();
+        }
+
+        public static void ConsultarPedidoCarregmentoAdiantamento()
+        {
+            using var db = new Data.ApplicationContext();
+
+            var pedidos = db.Pedidos
+                .Include(p => p.Itens)
+                    .ThenInclude(p => p.Produto)
+                .ToList();
+
+            Console.WriteLine(pedidos.Count);
+        }
+
+        public static void CadastrarPedido()
+        {
+           
         }
 
         private static void ConsultarDados()
